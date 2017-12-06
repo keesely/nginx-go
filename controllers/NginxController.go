@@ -3,9 +3,9 @@ package controllers
 import (
 	"fmt"
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/config"
+	//"github.com/astaxie/beego/config"
 	"github.com/keesely/nginx"
-	"log"
+	//"log"
 	//"strings"
 	//"time"
 )
@@ -15,15 +15,9 @@ type NginxController struct {
 }
 
 func ngx() *nginx.Nginx {
-	conf, err := config.NewConfig("ini", "/etc/nginx-go.conf")
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	ngx := new(nginx.Nginx)
-	ngx.Nginx = conf.String("nginx")
-	ngx.Pid = conf.String("pidfile")
+	ngx.Nginx = beego.AppConfig.String("nginx")
+	ngx.Pid = beego.AppConfig.String("pid")
 	//ngx.Conf_path = conf.String("confpath")
 	//ngx.Vhost_path = conf.String("vhostpath")
 	return ngx
